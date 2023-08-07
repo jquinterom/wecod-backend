@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Cors auth
 CORS_ALLOWED_ORIGINS = [
-    "https://wecod-backend.onrender.com/"
+    ".onrender.com"
 ]
 
 REST_FRAMEWORK = {
