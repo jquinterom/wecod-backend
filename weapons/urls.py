@@ -6,6 +6,7 @@ from weapons import views
 # rest router
 router = routers.DefaultRouter()
 router.register(r'weapons', views.WeaponView, 'weapons')
+router.register(r'categories', views.CategoryView, 'categories')
 
 urlpatterns = [
     path("api/v1/", include(router.urls)),

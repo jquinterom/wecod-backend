@@ -3,3 +3,6 @@
 env/
 
 __pycache__
+
+/weapons/__pycache__
+/wecod_backend/__pycache__
