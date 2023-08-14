@@ -16,7 +16,7 @@ class Category(models.Model):
 
 class Weapon(models.Model):
     name = models.CharField(max_length=200)
-    category = models.ForeignKey(        Category, null=False, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
