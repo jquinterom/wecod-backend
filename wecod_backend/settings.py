@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'weapons',
     'rest_framework',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
