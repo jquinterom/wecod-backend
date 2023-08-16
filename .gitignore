@@ -6,3 +6,6 @@ __pycache__
 
 /weapons/__pycache__
 /wecod_backend/__pycache__
+
+weapons/migrations/
+/weapons/migrations/
