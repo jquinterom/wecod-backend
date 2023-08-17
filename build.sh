@@ -4,7 +4,13 @@ set -o errexit
 
 pip install -r requirements.txt
 
+# Static files
 python manage.py collectstatic --no-input
+
+# Restart database
+python manage.py flush
 python manage.py makemigrations
 python manage.py migrate
+
+# Insert new data
 python manage.py seed weapons --number=5 
