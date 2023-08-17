@@ -9,6 +9,8 @@ python manage.py collectstatic --no-input
 
 # Restart database
 python manage.py flush
+print('yes')
+
 python manage.py makemigrations
 python manage.py migrate
 
