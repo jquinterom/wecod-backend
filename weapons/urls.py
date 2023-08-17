@@ -8,7 +8,8 @@ router = routers.DefaultRouter()
 router.register(r'weapons', views.WeaponView, 'weapons')
 router.register(r'categories', views.CategoryView, 'categories')
 router.register(r'customWeapons', views.CustomWeaponView, 'customWeapons')
-# router.register(r'rateCustomWeapons', views.AverageRateCustomWeaponView, 'rateCustomWeapons')
+router.register(r'rateCustomWeapons',
+                views.AverageRateCustomWeaponView, 'rateCustomWeapons')
 
 urlpatterns = [
     path("api/v1/", include(router.urls)),

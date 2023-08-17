@@ -136,7 +136,6 @@ class CustomWeapon(models.Model):
         verbose_name_plural = "CustomWeapons"
 
 
-"""
 class RateCustomWeapon(models.Model):
     customWeapon = models.ForeignKey(
         CustomWeapon, blank=True, null=True, on_delete=models.DO_NOTHING)
@@ -147,4 +146,3 @@ class RateCustomWeapon(models.Model):
 
     def __str__(self) -> str:
         return self.id
-"""

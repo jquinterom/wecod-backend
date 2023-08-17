@@ -11,7 +11,8 @@ from .models import (
     Underbarrel,
     Ammunition,
     RearGrip,
-    CustomWeapon
+    CustomWeapon,
+    RateCustomWeapon
 )
 
 # Register your models here.
@@ -27,3 +28,4 @@ admin.site.register(Underbarrel)
 admin.site.register(Ammunition)
 admin.site.register(RearGrip)
 admin.site.register(CustomWeapon)
+admin.site.register(RateCustomWeapon)
