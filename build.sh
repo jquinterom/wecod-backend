@@ -5,11 +5,11 @@ set -o errexit
 pip install -r requirements.txt
 
 # Static files
+mkdir static
 python manage.py collectstatic --no-input
 
 # Restart database
-python manage.py flush
-print('yes')
+python manage.py flush --no-input
 
 python manage.py makemigrations
 python manage.py migrate
