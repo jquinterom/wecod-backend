@@ -15,4 +15,4 @@ python manage.py makemigrations weapons
 python manage.py migrate
 
 # Insert new data
-# python manage.py seed weapons --number=5 
+python manage.py seed weapons --number=5 
