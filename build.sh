@@ -12,7 +12,7 @@ python manage.py collectstatic --no-input
 python manage.py flush --no-input
 
 python manage.py makemigrations weapons
-python manage.py migrate
+python manage.py migrate weapons
 
 # Insert new data
 python manage.py seed weapons --number=5 
