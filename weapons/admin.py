@@ -9,6 +9,7 @@ from .models import (
     Perk,
     Lazer,
     Underbarrel,
+    Ammunition,
     RearGrip,
     CustomWeapon
 )
@@ -23,5 +24,6 @@ admin.site.register(Stock)
 admin.site.register(Perk)
 admin.site.register(Lazer)
 admin.site.register(Underbarrel)
+admin.site.register(Ammunition)
 admin.site.register(RearGrip)
 admin.site.register(CustomWeapon)

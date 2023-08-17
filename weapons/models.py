@@ -88,6 +88,15 @@ class Underbarrel(models.Model):
         return self.name
 
 
+class Ammunition(models.Model):
+    name = models.CharField(max_length=200)
+    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class RearGrip(models.Model):
     name = models.CharField(max_length=200)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -111,8 +120,11 @@ class CustomWeapon(models.Model):
     lazer = models.ForeignKey(Lazer, null=True, on_delete=models.DO_NOTHING)
     underbarrel = models.ForeignKey(
         Underbarrel, null=True, on_delete=models.DO_NOTHING)
+    ammunition = models.ForeignKey(
+        Ammunition, null=True, on_delete=models.DO_NOTHING)
     reargrip = models.ForeignKey(
         RearGrip, null=True, blank=True, on_delete=models.DO_NOTHING)
+
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
