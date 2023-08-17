@@ -124,12 +124,15 @@ class CustomWeapon(models.Model):
         Ammunition, null=True, on_delete=models.DO_NOTHING)
     reargrip = models.ForeignKey(
         RearGrip, null=True, blank=True, on_delete=models.DO_NOTHING)
-
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def __str__(self) -> str:
         return self.name
+
+    class Meta:
+        verbose_name = "CustomWeapon"
+        verbose_name_plural = "CustomWeapons"
 
 
 """
