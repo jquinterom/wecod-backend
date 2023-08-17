@@ -130,3 +130,15 @@ class CustomWeapon(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class RateCustomWeapon(models.Model):
+    customWeapon = models.ForeignKey(
+        CustomWeapon, blank=False, default=1, on_delete=models.DO_NOTHING)
+    rate = models.SmallIntegerField(blank=False, default=0)
+
+    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self) -> str:
+        return self.id
