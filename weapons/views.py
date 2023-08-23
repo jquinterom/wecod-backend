@@ -1,6 +1,13 @@
 from rest_framework import viewsets
-from .serializer import WeaponSerializer, CategorySerializer, CustomWeaponSerializer, RateCustomWeaponSerializer, AverageRateCustomWeaponSerializer
-from .models import Weapon, Category, CustomWeapon, RateCustomWeapon
+from .serializer import (
+    WeaponSerializer,
+    CategorySerializer,
+    CustomWeaponSerializer,
+    RateCustomWeaponSerializer,
+    AverageRateCustomWeaponSerializer,
+    GameModeSerializer
+)
+from .models import Weapon, Category, CustomWeapon, RateCustomWeapon, GameMode
 from django.db.models import Avg
 
 
@@ -23,3 +30,8 @@ class AverageRateCustomWeaponView(viewsets.ModelViewSet):
     serializer_class = AverageRateCustomWeaponSerializer
     queryset = RateCustomWeapon.objects.values(
         'customWeapon').annotate(avg_rate=Avg('rate'))
+
+
+class GameModesView(viewsets.ModelViewSet):
+    serializer_class = GameModeSerializer
+    queryset = GameMode.objects.all()

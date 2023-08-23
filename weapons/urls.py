@@ -10,6 +10,9 @@ router.register(r'categories', views.CategoryView, 'categories')
 router.register(r'customWeapons', views.CustomWeaponView, 'customWeapons')
 router.register(r'rateCustomWeapons',
                 views.AverageRateCustomWeaponView, 'rateCustomWeapons')
+router.register(r'gameModes',
+                views.GameModesView, 'gameModes')
+
 
 urlpatterns = [
     path("api/v1/", include(router.urls)),

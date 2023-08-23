@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from .models import Weapon, Category, CustomWeapon, RateCustomWeapon, AverageRateCustomWeapon
+from .models import (
+    Weapon,
+    Category,
+    CustomWeapon,
+    RateCustomWeapon,
+    AverageRateCustomWeapon,
+    GameMode
+)
 
 
 class WeaponSerializer(serializers.ModelSerializer):
@@ -29,4 +36,10 @@ class RateCustomWeaponSerializer(serializers.ModelSerializer):
 class AverageRateCustomWeaponSerializer(serializers.ModelSerializer):
     class Meta:
         model = AverageRateCustomWeapon
+        fields = '__all__'
+
+
+class GameModeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GameMode
         fields = '__all__'
