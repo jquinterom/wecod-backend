@@ -18,6 +18,7 @@ class Weapon(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(
         Category, null=True, on_delete=models.CASCADE)
+    img_url = models.URLField(null=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
@@ -135,6 +136,7 @@ class CustomWeapon(models.Model):
         RearGrip, null=True, blank=True, on_delete=models.DO_NOTHING)
     game_mode = models.ForeignKey(
         GameMode, null=True, on_delete=models.DO_NOTHING)
+    img_url = models.URLField(null=True)
 
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
