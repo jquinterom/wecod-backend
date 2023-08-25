@@ -17,8 +17,22 @@ class Category(models.Model):
 class Weapon(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(
-        Category, null=True, on_delete=models.CASCADE)
+        Category, null=True, on_delete=models.DO_NOTHING)
     img_url = models.URLField(null=True)
+    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Accesory(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    type_accessory = models.CharField(max_length=200)
+    category_weapon = models.ForeignKey(
+        Category, null=True, on_delete=models.DO_NOTHING)
+
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 

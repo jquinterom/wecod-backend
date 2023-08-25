@@ -5,13 +5,20 @@ from .models import (
     CustomWeapon,
     RateCustomWeapon,
     AverageRateCustomWeapon,
-    GameMode
+    GameMode,
+    Accesory
 )
 
 
 class WeaponSerializer(serializers.ModelSerializer):
     class Meta:
         model = Weapon
+        fields = '__all__'
+
+
+class AccesorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Accesory
         fields = '__all__'
 
 
