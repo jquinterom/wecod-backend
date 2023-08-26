@@ -1,6 +1,5 @@
 from django.urls import path, include
 from rest_framework import routers
-from rest_framework.documentation import include_docs_urls
 from weapons import views
 
 # rest router
@@ -16,8 +15,8 @@ router.register(r'gameModes',
 router.register(r'customWeaponTwo',
                 views.customWeaponTwoView, 'customWeaponTwo')
 
-
 urlpatterns = [
     path("api/v1/", include(router.urls)),
-    path('docs/', include_docs_urls(title="Weapons api"))
+    path("customW/<int:id>/",
+         views.customWView.as_view(), name="customW")
 ]

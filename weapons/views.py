@@ -43,6 +43,8 @@ class GameModesView(viewsets.ModelViewSet):
 
 class customWeaponTwoView(viewsets.ModelViewSet):
 
+    serializer_class = GameModeSerializer
+
     @action(detail=True, methods=["get"])
     def get_queryset(self):
         print(self)
@@ -64,3 +66,10 @@ class customWeaponTwoView(viewsets.ModelViewSet):
                          "accessories": accessories_serializer.data}
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+
+class customWView(APIView):
+    def get(self, request, id,  **args):
+        weapon = Weapon.objects.get(pk=id)
+        serializer = WeaponSerializer(weapon, many=False)
+        return Response(serializer.data)
