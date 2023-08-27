@@ -31,10 +31,17 @@ class CustomWeaponView(viewsets.ModelViewSet):
     queryset = CustomWeapon.objects.all()
 
 
-class AverageRateCustomWeaponView(viewsets.ModelViewSet):
-    serializer_class = AverageRateCustomWeaponSerializer
-    queryset = RateCustomWeapon.objects.values(
-        'customWeapon').annotate(avg_rate=Avg('rate'))
+class AverageRateCustomWeaponView(APIView):
+    def get(self, request):
+        try:
+            avg_custom_weapon = RateCustomWeapon.objects.values(
+                'customWeapon').annotate(avg_rate=Avg('rate'))
+            serializer_avg = AverageRateCustomWeaponSerializer(
+                instance=avg_custom_weapon, many=True)
+        except RateCustomWeapon.DoesNotExist:
+            return errorNotFound("Rate for custom weapons does not exists")
+
+        return successResponse("Data found", serializer_avg.data)
 
 
 class GameModesView(viewsets.ModelViewSet):
@@ -52,6 +59,7 @@ class customWeaponTwoView(APIView):
 
         accessories = Accesory.objects.all()
         weapon_serializer = WeaponSerializer(weapon)
+        print(weapon_serializer)
         accessories_serializer = AccesorySerializer(accessories, many=True)
         response_data = {"customWeapon": weapon_serializer.data,
                          "accessories": accessories_serializer.data}

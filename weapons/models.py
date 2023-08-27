@@ -173,11 +173,3 @@ class RateCustomWeapon(models.Model):
 
     def __str__(self) -> str:
         return self.customWeapon.name
-
-
-class AverageRateCustomWeapon(models.Model):
-    customWeapon = models.IntegerField(null=False, default=0)
-    avg_rate = models.FloatField(blank=False, default=0.0)
-
-    def __str__(self) -> str:
-        return str(self.customWeapon)

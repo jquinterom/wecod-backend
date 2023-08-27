@@ -4,7 +4,6 @@ from .models import (
     Category,
     CustomWeapon,
     RateCustomWeapon,
-    AverageRateCustomWeapon,
     GameMode,
     Accesory
 )
@@ -40,10 +39,9 @@ class RateCustomWeaponSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AverageRateCustomWeaponSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AverageRateCustomWeapon
-        fields = '__all__'
+class AverageRateCustomWeaponSerializer(serializers.Serializer):
+    customWeapon = serializers.IntegerField()
+    avg_rate = serializers.FloatField()
 
 
 class GameModeSerializer(serializers.ModelSerializer):
