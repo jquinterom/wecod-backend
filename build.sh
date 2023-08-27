@@ -15,6 +15,7 @@ python manage.py makemigrations weapons
 
 python manage.py migrate weapons
 
+python manage.py makemigrations
 python manage.py migrate
 
 
