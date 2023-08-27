@@ -12,7 +12,8 @@ from .models import Weapon, Category, CustomWeapon, RateCustomWeapon, GameMode, 
 from django.db.models import Avg
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from .utils.errorResponse import errorNotFound
+from .utils.successResponse import successResponse
 
 
 class WeaponView(viewsets.ModelViewSet):
@@ -41,35 +42,18 @@ class GameModesView(viewsets.ModelViewSet):
     queryset = GameMode.objects.all()
 
 
-class customWeaponTwoView(viewsets.ModelViewSet):
+class customWeaponTwoView(APIView):
 
-    serializer_class = GameModeSerializer
-
-    @action(detail=True, methods=["get"])
-    def get_queryset(self):
-        print(self)
+    def get(self, request, id):
         try:
-            weapon = Weapon.objects.get(pk=1)
+            weapon = Weapon.objects.get(pk=id)
         except Weapon.DoesNotExist:
-            return Respose(
-                {"error": "loading weapons"},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            return errorNotFound("Weapon Does not exists")
 
         accessories = Accesory.objects.all()
-
         weapon_serializer = WeaponSerializer(weapon)
-
         accessories_serializer = AccesorySerializer(accessories, many=True)
-
         response_data = {"customWeapon": weapon_serializer.data,
                          "accessories": accessories_serializer.data}
 
-        return Response(response_data, status=status.HTTP_200_OK)
-
-
-class customWView(APIView):
-    def get(self, request, id,  **args):
-        weapon = Weapon.objects.get(pk=id)
-        serializer = WeaponSerializer(weapon, many=False)
-        return Response(serializer.data)
+        return successResponse("Data found", response_data)
