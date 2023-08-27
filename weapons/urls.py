@@ -12,9 +12,10 @@ router.register(r'rateCustomWeapons',
 router.register(r'gameModes',
                 views.GameModesView, 'gameModes')
 
-
 urlpatterns = [
-    path("api/v1/", include(router.urls)),
-    path('customWeaponTwo/<int:id>/', views.customWeaponTwoView.as_view(),
-         name='customWeaponTwo')
+    path("", include(router.urls)),
+    path('customWeaponTwo/<int:id>/',
+         views.customWeaponTwoView.as_view(), name='customWeaponTwo')
 ]
+
+# urlpatterns = [path(r'^api/v1/', include(urlpatterns))]

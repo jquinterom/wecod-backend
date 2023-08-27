@@ -20,9 +20,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.documentation import include_docs_urls
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+# api version 1
+api_v1 = [
     path('weapons/', include('weapons.urls')),
+]
+urlpatterns = [path('api/v1/', include(api_v1))]
+
+# admin and documentation
+urlpatterns += [
+    path('admin/', admin.site.urls),
     path('docs/', include_docs_urls(title="Weapons api")),
 ]
 
