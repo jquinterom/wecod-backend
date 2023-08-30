@@ -6,9 +6,11 @@ from .serializer import (
     RateCustomWeaponSerializer,
     AverageRateCustomWeaponSerializer,
     GameModeSerializer,
-    AccesorySerializer
+    AccesorySerializer,
+    CustomWeaponAccessorySerializer
 )
-from .models import Weapon, Category, CustomWeapon, RateCustomWeapon, GameMode, Accesory
+from .models import (Weapon, Category, CustomWeapon,
+                     RateCustomWeapon, GameMode, Accesory,  CustomWeaponAccessory)
 from django.db.models import Avg
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -49,6 +51,7 @@ class GameModesView(viewsets.ModelViewSet):
     queryset = GameMode.objects.all()
 
 
+# Deleting in the future
 class customWeaponTwoView(APIView):
 
     def get(self, request, id):
@@ -65,3 +68,13 @@ class customWeaponTwoView(APIView):
                          "accessories": accessories_serializer.data}
 
         return successResponse("Data found", response_data)
+
+
+class AccessoryView(viewsets.ModelViewSet):
+    serializer_class = AccesorySerializer
+    queryset = Accesory.objects.all()
+
+
+class CustomWeaponAccessoryView(viewsets.ModelViewSet):
+    serializer_class = CustomWeaponAccessorySerializer
+    queryset = CustomWeaponAccessory.objects.all()

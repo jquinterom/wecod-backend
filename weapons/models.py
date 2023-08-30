@@ -26,94 +26,23 @@ class Weapon(models.Model):
         return self.name
 
 
+class TypeAccessory(models.Model):
+    name = models.CharField(max_length=200)
+    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Accesory(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    type_accessory = models.CharField(max_length=200)
+    type_accessory = models.ForeignKey(
+        TypeAccessory, null=True, on_delete=models.DO_NOTHING)
     category_weapon = models.ForeignKey(
         Category, null=True, on_delete=models.DO_NOTHING)
 
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Mozzle(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Barrel(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Optic(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Stock(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Perk(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Lazer(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Underbarrel(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Ammunition(models.Model):
-    name = models.CharField(max_length=200)
-    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class RearGrip(models.Model):
-    name = models.CharField(max_length=200)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
@@ -134,20 +63,6 @@ class CustomWeapon(models.Model):
     name = models.CharField(max_length=200, null=False, default="Uknown")
     original_weapon = models.ForeignKey(
         Weapon, null=False, on_delete=models.DO_NOTHING)
-    mozzle = models.ForeignKey(
-        Mozzle, null=True, on_delete=models.DO_NOTHING)
-    barrel = models.ForeignKey(
-        Barrel, null=True, on_delete=models.DO_NOTHING)
-    optic = models.ForeignKey(Optic, null=True, on_delete=models.DO_NOTHING)
-    stock = models.ForeignKey(Stock, null=True, on_delete=models.DO_NOTHING)
-    perk = models.ForeignKey(Perk, null=True, on_delete=models.DO_NOTHING)
-    lazer = models.ForeignKey(Lazer, null=True, on_delete=models.DO_NOTHING)
-    underbarrel = models.ForeignKey(
-        Underbarrel, null=True, on_delete=models.DO_NOTHING)
-    ammunition = models.ForeignKey(
-        Ammunition, null=True, on_delete=models.DO_NOTHING)
-    reargrip = models.ForeignKey(
-        RearGrip, null=True, blank=True, on_delete=models.DO_NOTHING)
     game_mode = models.ForeignKey(
         GameMode, null=True, on_delete=models.DO_NOTHING)
     img_url = models.URLField(null=True)
@@ -161,6 +76,16 @@ class CustomWeapon(models.Model):
     class Meta:
         verbose_name = "CustomWeapon"
         verbose_name_plural = "CustomWeapons"
+
+
+class CustomWeaponAccessory(models.Model):
+    customWeapon = models.ForeignKey(
+        CustomWeapon, null=True, on_delete=models.CASCADE)
+    accesory = models.ForeignKey(
+        Accesory, null=True,  on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.customWeapon.name
 
 
 class RateCustomWeapon(models.Model):
