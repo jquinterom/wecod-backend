@@ -85,4 +85,8 @@ class RateCustomWeapon(models.Model):
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def __str__(self) -> str:
+        print(self.rate)
+        if (self.customWeapon == None):
+            return 'No custom weapon'
+
         return self.customWeapon.name

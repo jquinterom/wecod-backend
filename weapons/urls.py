@@ -15,7 +15,5 @@ urlpatterns = [
     path("", include(router.urls)),
 ]
 
-urlpatterns += [path('rateCustomWeapons/',
-                     views.AverageRateCustomWeaponView.as_view(), name='rateCustomWeapons'),
-                path('customWeaponTwo/<int:id>/',
-                     views.customWeaponTwoView.as_view(), name='customWeaponTwo')]
+urlpatterns += [path('rateCustomWeaponsAvg/',
+                     views.AverageRateCustomWeaponView.as_view(), name='rateCustomWeaponsAvg'),]

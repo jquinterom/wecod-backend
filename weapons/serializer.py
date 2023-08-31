@@ -9,7 +9,15 @@ from .models import (
 )
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'name')
+
+
 class WeaponSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True, many=False)
+
     class Meta:
         model = Weapon
         fields = '__all__'
@@ -21,12 +29,6 @@ class AccesorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ('id', 'name')
-
-
 class CustomWeaponSerializer(serializers.ModelSerializer):
     original_weapon = WeaponSerializer(read_only=True, many=False)
 
@@ -36,6 +38,8 @@ class CustomWeaponSerializer(serializers.ModelSerializer):
 
 
 class RateCustomWeaponSerializer(serializers.ModelSerializer):
+    customWeapon = CustomWeaponSerializer(read_only=True, many=False)
+
     class Meta:
         model = RateCustomWeapon
         fields = '__all__'
@@ -47,6 +51,8 @@ class AverageRateCustomWeaponSerializer(serializers.Serializer):
 
 
 class CustomWeaponAccessorySerializer(serializers.ModelSerializer):
+    customWeapon = CustomWeaponSerializer(read_only=True, many=False)
+
     class Meta:
         model = CustomWeaponAccessory
         fields = '__all__'
