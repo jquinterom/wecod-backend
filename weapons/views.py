@@ -5,12 +5,11 @@ from .serializer import (
     CustomWeaponSerializer,
     RateCustomWeaponSerializer,
     AverageRateCustomWeaponSerializer,
-    GameModeSerializer,
     AccesorySerializer,
     CustomWeaponAccessorySerializer
 )
 from .models import (Weapon, Category, CustomWeapon,
-                     RateCustomWeapon, GameMode, Accesory,  CustomWeaponAccessory)
+                     RateCustomWeapon, Accesory,  CustomWeaponAccessory)
 from django.db.models import Avg
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -44,11 +43,6 @@ class AverageRateCustomWeaponView(APIView):
             return errorNotFound("Rate for custom weapons does not exists")
 
         return successResponse("Data found", serializer_avg.data)
-
-
-class GameModesView(viewsets.ModelViewSet):
-    serializer_class = GameModeSerializer
-    queryset = GameMode.objects.all()
 
 
 # Deleting in the future

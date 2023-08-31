@@ -4,7 +4,6 @@ from .models import (
     Category,
     CustomWeapon,
     RateCustomWeapon,
-    GameMode,
     Accesory,
     CustomWeaponAccessory,
 )
@@ -29,6 +28,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class CustomWeaponSerializer(serializers.ModelSerializer):
+    original_weapon = WeaponSerializer(read_only=True, many=False)
+
     class Meta:
         model = CustomWeapon
         fields = '__all__'
@@ -41,14 +42,8 @@ class RateCustomWeaponSerializer(serializers.ModelSerializer):
 
 
 class AverageRateCustomWeaponSerializer(serializers.Serializer):
-    customWeapon = serializers.IntegerField()
+    customWeapon = CustomWeaponSerializer(read_only=True, many=False)
     avg_rate = serializers.FloatField()
-
-
-class GameModeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GameMode
-        fields = '__all__'
 
 
 class CustomWeaponAccessorySerializer(serializers.ModelSerializer):
