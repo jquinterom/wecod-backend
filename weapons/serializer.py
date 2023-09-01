@@ -47,7 +47,7 @@ class RateCustomWeaponSerializer(serializers.ModelSerializer):
 
 class AverageRateCustomWeaponSerializer(CustomWeaponSerializer):
     # customWeapon = CustomWeaponSerializer(read_only=True, many=False)
-    # avg_rate = serializers.FloatField()
+    avg_rate = serializers.FloatField()
     pass
 
 
