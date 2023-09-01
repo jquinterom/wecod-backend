@@ -43,28 +43,10 @@ class AverageRateCustomWeaponView(APIView):
 
             cwd = []
             for cw in avg_custom_weapon1:
-                print(cw)
-                # print(CustomWeapon.objects.get(id=cw.))
                 cwd.append({
-                    'customWeapon': CustomWeapon.objects.values().get(id=1),
-                    'rate': cw
+                    'customWeapon': CustomWeapon.objects.values().get(id=cw["customWeapon"]),
+                    'rate': cw["rate__avg"]
                 })
-
-            print(cwd)
-            custom_weapon_Data = []
-            for custom_weapon in avg_custom_weapon:
-                custom_weapon_Data.append({
-                    'customWeapon': str(custom_weapon.customWeapon),
-                    'rate': custom_weapon.rate,
-                })
-
-            serializer_avg = AverageRateCustomWeaponSerializer(
-                instance=avg_custom_weapon, many=True)
-            response_data = {
-                'status': 'success',
-                'message': 'data ok',
-                'data': custom_weapon_Data
-            }
 
         except RateCustomWeapon.DoesNotExist:
             return errorNotFound("Rate for custom weapons does not exists")
