@@ -78,7 +78,7 @@ class CustomWeaponAccessory(models.Model):
 
 class RateCustomWeapon(models.Model):
     customWeapon = models.ForeignKey(
-        CustomWeapon, blank=True, null=True, on_delete=models.DO_NOTHING)
+        CustomWeapon, null=False, on_delete=models.DO_NOTHING)
     rate = models.PositiveIntegerField(blank=False, default=0)
 
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
