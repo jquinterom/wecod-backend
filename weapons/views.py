@@ -56,7 +56,7 @@ class AverageRateCustomWeaponView(APIView):
         except RateCustomWeapon.DoesNotExist:
             return errorNotFound("Rate for custom weapons does not exists")
 
-        return successResponse("ddd", custom_weapons_avg)
+        return successResponse("Data Found", custom_weapons_avg)
 
 
 class AccessoryView(viewsets.ModelViewSet):
