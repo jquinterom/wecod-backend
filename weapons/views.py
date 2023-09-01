@@ -54,8 +54,13 @@ class AverageRateCustomWeaponView(APIView):
             serializer_avg = AverageRateCustomWeaponSerializer(
                 custom_weapons_avg, many=False)
 
-        except RateCustomWeapon.DoesNotExist:
-            return errorNotFound("Rate for custom weapons does not exists")
+        except RateCustomWeapon.DoesNotExist as rateCustomDoesNotExists:
+            print(rateCustomDoesNotExists)
+            return errorNotFound("Rate for custom weapons does not exist")
+
+        except CustomWeapon.DoesNotExist as customWeaponDoesNotExist:
+            print(customWeaponDoesNotExist)
+            return errorNotFound("Custom weapon does not exist")
 
         except Exception as e:
             print(e)
