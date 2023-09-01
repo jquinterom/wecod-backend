@@ -37,15 +37,14 @@ class CustomWeaponView(viewsets.ModelViewSet):
 class AverageRateCustomWeaponView(APIView):
     def get(self, request):
         try:
-            """
-            avg_custom_weapon = RateCustomWeapon.objects.values(
-                'customWeapon').annotate(avg_rate=Avg('rate'))
-            """
             avg_custom_weapon = RateCustomWeapon.objects.all()
             avg_custom_weapon1 = RateCustomWeapon.objects.values(
                 'customWeapon').annotate(Avg('rate'))
 
-            print(avg_custom_weapon1)
+            cwd = []
+            for cw in avg_custom_weapon1:
+                ss = json.dumps(cw)
+                # print(CustomWeapon.objects.get(id=cw.))
 
             custom_weapon_Data = []
             for custom_weapon in avg_custom_weapon:
@@ -61,24 +60,11 @@ class AverageRateCustomWeaponView(APIView):
                 'message': 'data ok',
                 'data': custom_weapon_Data
             }
-            # print(response_data)
-            """
-            avg_custom_weapon1 = RateCustomWeapon.objects.all()
-
-            serializer_avg1 = AverageRateCustomWeaponSerializer(
-                instance=avg_custom_weapon1, many=True)
-            """
-
-            # select AVG(r.rate), r.* from ratecustomweapon r GROUP by r.customWeaponId;
-
-            # print(serializer_avg.data)
-            # print(serializer_avg1.data)
 
         except RateCustomWeapon.DoesNotExist:
             return errorNotFound("Rate for custom weapons does not exists")
 
         return successResponse("ddd", response_data)
-        # return JsonResponse(response_data)
 
 
 class AccessoryView(viewsets.ModelViewSet):
