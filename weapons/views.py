@@ -3,7 +3,6 @@ from .serializer import (
     WeaponSerializer,
     CategorySerializer,
     CustomWeaponSerializer,
-    RateCustomWeaponSerializer,
     AverageRateCustomWeaponSerializer,
     AccesorySerializer,
     CustomWeaponAccessorySerializer
@@ -12,11 +11,9 @@ from .models import (Weapon, Category, CustomWeapon,
                      RateCustomWeapon, Accesory,  CustomWeaponAccessory)
 from django.db.models import Avg
 from rest_framework.views import APIView
-from rest_framework.response import Response
 from .utils.errorResponse import errorNotFound
 from .utils.successResponse import successResponse
-import json
-from django.http import JsonResponse
+from math import ceil
 
 
 class WeaponView(viewsets.ModelViewSet):
@@ -37,26 +34,30 @@ class CustomWeaponView(viewsets.ModelViewSet):
 class AverageRateCustomWeaponView(APIView):
     def get(self, request):
         try:
-            avg_custom_weapon = RateCustomWeapon.objects.all()
-            avg_custom_weapon1 = RateCustomWeapon.objects.values(
+            avg_custom_weapon = RateCustomWeapon.objects.values(
                 'customWeapon').annotate(Avg('rate'))
 
             custom_weapons_avg = []
-            for c_weapon_avg in avg_custom_weapon1:
+            for c_weapon_avg in avg_custom_weapon:
+
+                customWeapon = CustomWeapon.objects.get(
+                    id=c_weapon_avg['customWeapon'])
+
+                serializer_custom_weapon = CustomWeaponSerializer(
+                    customWeapon, many=False)
+
                 custom_weapons_avg.append({
-                    'customWeapon': CustomWeapon.objects.values().get(id=c_weapon_avg['customWeapon']),
-                    'rate_avg': c_weapon_avg['rate__avg']
+                    'customWeapon': serializer_custom_weapon.data,
+                    'avg_rate': ceil(c_weapon_avg['rate__avg'])
                 })
 
             serializer_avg = AverageRateCustomWeaponSerializer(
-                instance=custom_weapons_avg, many=True)
-
-            print(serializer_avg)
+                custom_weapons_avg, many=False)
 
         except RateCustomWeapon.DoesNotExist:
             return errorNotFound("Rate for custom weapons does not exists")
 
-        return successResponse("Data Found", custom_weapons_avg)
+        return successResponse("Data Found", serializer_avg.instance)
 
 
 class AccessoryView(viewsets.ModelViewSet):
