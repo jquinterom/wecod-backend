@@ -37,21 +37,20 @@ class CustomWeaponView(viewsets.ModelViewSet):
 class AverageRateCustomWeaponView(APIView):
     def get(self, request):
         try:
-            avg_custom_weapon = RateCustomWeapon.objects.all()
-            avg_custom_weapon1 = RateCustomWeapon.objects.values(
+            avg_custom_weapon = RateCustomWeapon.objects.values(
                 'customWeapon').annotate(Avg('rate'))
 
-            cwd = []
-            for cw in avg_custom_weapon1:
-                cwd.append({
-                    'customWeapon': CustomWeapon.objects.values().get(id=cw["customWeapon"]),
-                    'rate': cw["rate__avg"]
+            custom_weapon_avg = []
+            for avg in avg_custom_weapon:
+                custom_weapon_avg.append({
+                    'customWeapon': CustomWeapon.objects.values().get(id=avg["customWeapon"]),
+                    'rate': avg["rate__avg"]
                 })
 
         except RateCustomWeapon.DoesNotExist:
             return errorNotFound("Rate for custom weapons does not exists")
 
-        return successResponse("ddd", cwd)
+        return successResponse("Data Found", custom_weapon_avg)
 
 
 class AccessoryView(viewsets.ModelViewSet):
