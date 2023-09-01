@@ -43,7 +43,7 @@ class AverageRateCustomWeaponView(APIView):
 
             cwd = []
             for cw in avg_custom_weapon1:
-                ss = json.dumps(cw)
+                print(cw)
                 # print(CustomWeapon.objects.get(id=cw.))
 
             custom_weapon_Data = []
