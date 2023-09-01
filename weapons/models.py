@@ -79,14 +79,7 @@ class CustomWeaponAccessory(models.Model):
 class RateCustomWeapon(models.Model):
     customWeapon = models.ForeignKey(
         CustomWeapon, blank=True, null=True, on_delete=models.DO_NOTHING)
-    rate = models.SmallIntegerField(blank=False, default=0)
+    rate = models.PositiveIntegerField(blank=False, default=0)
 
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    def __str__(self) -> str:
-        print(self.rate)
-        if (self.customWeapon == None):
-            return 'No custom weapon'
-
-        return self.customWeapon.name
