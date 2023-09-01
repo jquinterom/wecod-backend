@@ -57,6 +57,9 @@ class AverageRateCustomWeaponView(APIView):
         except RateCustomWeapon.DoesNotExist:
             return errorNotFound("Rate for custom weapons does not exists")
 
+        except Exception:
+            return errorNotFound("Error to get average by custom weapon")
+
         return successResponse("Data Found", serializer_avg.instance)
 
 
