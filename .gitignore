@@ -10,3 +10,7 @@ __pycache__
 
 weapons/migrations/
 /weapons/migrations/
+
+# Mac os Files
+.DS_Store
+weapons/DS_Store
